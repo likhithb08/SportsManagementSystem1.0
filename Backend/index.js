@@ -37,6 +37,9 @@ app.use(session({
     sameSite: 'lax',
   },
 }));
+app.get("/", (req, res) => {
+  res.send("Backend is live");
+});
 app.use('/api', registerRoute);
 // or whatever the correct path is
 
@@ -105,10 +108,11 @@ app.use('/api/chat', chatRoutes);
 app.use('/api/notifications', notificationRoutes)
 app.use('/api/events', eventRoutes); // Add event routes
 
+const PORT = process.env.PORT || 5000;
 
 mongoose.connect(process.env.MONGO_URI, {})
 .then(() => {
   console.log("✅ Connected to MongoDB");
-  app.listen(5000, () => console.log("Server running on port 5000"));
+  app.listen( process.env.PORT ||5000, () => console.log(`Server running on port {$PORT}`));
 })
 .catch(err => console.error(err));
