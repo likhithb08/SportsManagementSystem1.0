@@ -27,22 +27,6 @@ router.post('/', async (req, res) => {
   try {
     const message = new Message({ sender, content, role });
     await message.save();
-    res.status(201).json(message);
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to send message' });
-  }
-});
-
-router.post('/', async (req, res) => {
-  const { sender, content, role } = req.body;
-
-  if (!content || !sender || !role) {
-    return res.status(400).json({ error: 'Missing fields' });
-  }
-
-  try {
-    const message = new Message({ sender, content, role });
-    await message.save();
 
     // Notify users with different roles
     const usersToNotify = await Player.find({ role: { $ne: role } });
