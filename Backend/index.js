@@ -11,7 +11,8 @@ import playerRoutes from './routes/player.js';
 import chatRoutes from './routes/chat.js';
 import notificationRoutes from './routes/notifications.js';
 import eventRoutes from './routes/eventRoutes.js'; // Import event routes
-
+import dotenv from 'dotenv';
+dotenv.config({path : '../Database/.env'})
 
 // import { Server } from 'socket.io';
 
@@ -105,7 +106,7 @@ app.use('/api/notifications', notificationRoutes)
 app.use('/api/events', eventRoutes); // Add event routes
 
 
-mongoose.connect('mongodb://localhost:27017/sports-management', {})
+mongoose.connect(process.env.MONGO_URI, {})
 .then(() => {
   console.log("✅ Connected to MongoDB");
   app.listen(5000, () => console.log("Server running on port 5000"));
