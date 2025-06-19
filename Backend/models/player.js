@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 const performanceSchema = new mongoose.Schema({
   fitness: { type: Number, default: 0, min: 0, max: 100 },
